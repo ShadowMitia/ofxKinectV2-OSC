@@ -46,8 +46,8 @@ void ofxKinectV2OSC::parseOscMessages() {
 		receiver.getNextMessage(lastMessage);
 		logger.log(lastMessage);
 		mapper.map(lastMessage);
-        if (isRecording){
-            addToRecording(lastMessage);
+        if (kinectRecorder.isRecording){
+            kinectRecorder.addToRecording(lastMessage);
         }
 	}
 }
@@ -99,4 +99,8 @@ string ofxKinectV2OSC::parseLogger() {
 		parsed.append("\n" + logger.getLine(i));
 	}
 	return parsed;
+}
+
+void ofxKinectV2OSC::setRecording(bool isRecording){
+    kinectRecorder.setIsRecording(isRecording);
 }
