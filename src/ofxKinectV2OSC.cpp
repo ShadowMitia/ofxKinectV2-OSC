@@ -43,12 +43,13 @@ bool ofxKinectV2OSC::hasSkeletons() {
 
 void ofxKinectV2OSC::parseOscMessages() {
     while(receiver.hasWaitingMessages()) {
-		receiver.getNextMessage(lastMessage);
-		logger.log(lastMessage);
-		mapper.map(lastMessage);
+        receiver.getNextMessage(lastMessage);
         if (kinectRecorder.isRecording){
             kinectRecorder.addToRecording(lastMessage);
         }
+		logger.log(lastMessage);
+		mapper.map(lastMessage);
+
 	}
 }
 

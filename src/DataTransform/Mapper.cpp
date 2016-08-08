@@ -14,8 +14,8 @@ void Mapper::map(ofxOscMessage &_message) {
 			skeleton->setJoint(parser.parseJoint());
 		} else if(parser.isHand()) {
 			skeleton->setHand(parser.parseHand());
-		}
-	}
+        }
+    }
 }
 
 void Mapper::refresh() {

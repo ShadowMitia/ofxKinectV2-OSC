@@ -85,8 +85,8 @@ void Parser::tokenize(string address) {
 }
 
 ofVec3f Parser::orient(ofVec3f &point){
-	point.x = ofMap(point.x, -1, 1, 0, ofGetWidth());
-	point.y = ofMap(point.y, -1, 1, ofGetHeight(), 0);
+	point.x = ofMap(point.x, -1, 1, 0, ofGetWindowWidth());
+	point.y = ofMap(point.y, -1, 1, ofGetWindowHeight(), 0);
 	point.z = ofMap(point.z, 0, 2, 30, 10);
 	return point;
 }
