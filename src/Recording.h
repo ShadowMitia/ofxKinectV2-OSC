@@ -61,40 +61,31 @@ public:
         for (int i = 0; i < m.getNumArgs(); i++){
             if (m.getArgType(i) == OFXOSC_TYPE_STRING){
                 line_recorded += "s";
-            } if (m.getArgType(i) == OFXOSC_TYPE_FLOAT){
+            } else if (m.getArgType(i) == OFXOSC_TYPE_FLOAT){
                 line_recorded += "f";
+            } else if (m.getArgType(i) == OFXOSC_TYPE_FLOAT){
+                line_recorded += "i";
+            } else {
+                line_recorded += "_";
             }
         }
         line_recorded += " ";
-        if (m.getNumArgs() == 4) {
-            line_recorded += std::to_string(m.getArgAsFloat(0));
-            line_recorded += " ";
-            line_recorded += std::to_string(m.getArgAsFloat(1));
-            line_recorded += " ";
-            line_recorded += std::to_string(m.getArgAsFloat(2));
-            line_recorded += " ";
-            line_recorded += "\"" + m.getArgAsString(3) + "\"";
-            line_recorded += " ";
-        } else if (m.getNumArgs() == 2) {
-            line_recorded += "\"" + m.getArgAsString(0) + "\"";
-            line_recorded += " ";
-            line_recorded += "\"" + m.getArgAsString(1) + "\"";
-            line_recorded += " ";
-        } else {
-            line_recorded += "ERROR: unknown osc message: " + m.getAddress();
+        for (auto i = 0; i < m.getNumArgs(); i++){
+            if (m.getArgType(i) == OFXOSC_TYPE_FLOAT){
+                line_recorded += std::to_string(m.getArgAsFloat(i));
+                line_recorded += " ";
+            } else if (m.getArgType(i) == OFXOSC_TYPE_STRING){
+                line_recorded += "\"" + m.getArgAsString(i) + "\"";
+                line_recorded += " ";
+            } else {
+                line_recorded += "UNKNOWN ";
+            }
+        
         }
         line_recorded += "\r\n";
         cout << line_recorded << endl;
         tmpMessages.push_back(line_recorded);
         recording.append(line_recorded);
-    }
-    
-    void split(const string& s, char delim, vector<string>& elems){
-        stringstream ss(s);
-        string item;
-        while (getline(ss, item, delim)) {
-            elems.push_back(item);
-        }
     }
     
     void setIsRecording(bool value){
@@ -104,25 +95,7 @@ public:
             if (res == 0){
                 std::cout << "Couldn't write to file: " << filename << "";
             }
-            ofBuffer tmp = ofBufferFromFile(filename);
-        
-            auto data = std::string(tmp.getData());
-            vector<string> lines;
-            auto delim = '\n';
-
-            split(data, delim, lines);
-            /*
-            for (int i = 0; i < tmp.size(); i++){
-                if (!(lines[i]+"\n" == tmpMessages[i])){
-                    cout << "PROBLEM!!!!!!!" << endl;
-                    cout << i << endl;
-                    cout << lines[i];
-                    cout << tmpMessages[i];
-                }
-            }
-             */
-            cout << lines.size() << " " << tmpMessages.size() << endl;
-            
+            recording.clear();
         }
         isRecording = value;
     }
