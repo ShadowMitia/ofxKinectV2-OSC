@@ -3,7 +3,6 @@
 
 void Logger::log(ofxOscMessage message) {
 	buffer.insert(buffer.begin(), parse(message));
-    cout << buffer[0] << endl;
 	if(buffer.size() > BUFFER_SIZE) {
 		buffer.pop_back();
 	}
