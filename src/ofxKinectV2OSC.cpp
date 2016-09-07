@@ -9,7 +9,7 @@ void ofxKinectV2OSC::setup(int port, ofTrueTypeFont &_font) {
 
 void ofxKinectV2OSC::update() {
 	parseOscMessages();
-    clearStaleSkeletons();
+	clearStaleSkeletons();
 }
 
 void ofxKinectV2OSC::setSmoothing(SmoothingTechnique technique) {

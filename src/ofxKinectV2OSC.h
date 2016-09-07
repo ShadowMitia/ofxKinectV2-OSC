@@ -6,49 +6,47 @@
 #include "Draw/BodyRenderer.h"
 #include "Recording.h"
 
-
-
 class ofxKinectV2OSC {
 public:
-    void setup(int port, ofTrueTypeFont &_font);
-    void update();
-    void setSmoothing(SmoothingTechnique technique);
-    void setFont(ofTrueTypeFont _font);
-    vector<Skeleton>* getSkeletons();
-    Skeleton* getNearestSkeleton();
-    bool hasSkeletons();
-    void parseOscMessages();
-    void clearStaleSkeletons();
-    void drawDebug();
-    void toggleDebug();
-    void setRecording(bool isRecording);
+  void setup(int port, ofTrueTypeFont &_font);
+  void update();
+  void setSmoothing(SmoothingTechnique technique);
+  void setFont(ofTrueTypeFont _font);
+  std::vector<Skeleton>* getSkeletons();
+  Skeleton* getNearestSkeleton();
+  bool hasSkeletons();
+  void parseOscMessages();
+  void clearStaleSkeletons();
+  void drawDebug();
+  void toggleDebug();
+  void setRecording(bool isRecording);
     
-    void feedbackRecordedFile(){
-        kinectRecorder.feedbackRecordedFile();
-    }
+  void playbackRecordedFile(){
+    kinectRecorder.playbackRecordedFile();
+  }
     
-    void feedbackRecordedFile(std::string path){
-        kinectRecorder.feedbackRecordedFile(path);
-    }
+  void playbackRecordedFile(std::string path){
+    kinectRecorder.playbackRecordedFile(path);
+  }
     
-    bool isFeedbacking(){
-        return kinectRecorder.isFeedback();
-    }
+  bool isPlaybacking(){
+    return kinectRecorder.isPlayback();
+  }
     
 protected:
-    string buildDebugString();
-    string parseLogger();
+  std::string buildDebugString();
+  std::string parseLogger();
     
-    ofxOscReceiver receiver;
-    ofxOscMessage lastMessage;
-    string lastParsedMessage;
-    Logger logger;
-    Mapper mapper;
-    vector<Skeleton> skeletons;
-    ofTrueTypeFont font;
-    bool isDebugEnabled;
+  ofxOscReceiver receiver;
+  ofxOscMessage lastMessage;
+  std::string lastParsedMessage;
+  Logger logger;
+  Mapper mapper;
+  std::vector<Skeleton> skeletons;
+  ofTrueTypeFont font;
+  bool isDebugEnabled;
     
-    Recording kinectRecorder;
+  Recording kinectRecorder;
     
     
 };
