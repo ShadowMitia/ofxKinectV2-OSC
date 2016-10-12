@@ -33,6 +33,10 @@ public:
     return kinectRecorder.isPlayback();
   }
     
+  std::string getRecordedFile(){
+    return kinectRecorder.getLastRecordedFile();
+  }
+    
 protected:
   std::string buildDebugString();
   std::string parseLogger();
